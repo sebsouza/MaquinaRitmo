@@ -10,10 +10,11 @@ mymkdir = mkdir -p $1
 endif
 
 PROJECT_OBJS = \
+	project/FastShiftIn.cpp.o \
 	project/MaquinaRitmo.cpp.o \
 	project/Pattern.cpp.o \
 	project/Sequencer.cpp.o \
-	project/Voice.cpp.o \
+	project/Tlc5940.cpp.o \
 
 PLATFORM_CORE_OBJS = \
 	core/abi.cpp.o \
@@ -45,6 +46,7 @@ PLATFORM_CORE_OBJS = \
 PLATFORM_VARIANT_OBJS = \
 
 LIBRARIES_OBJS = \
+	libraries/SPI/src/SPI.cpp.o \
 
 TARGETS = \
 	MaquinaRitmo.hex \
@@ -66,9 +68,17 @@ clean:
 size:
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-size" -A "./MaquinaRitmo.elf"
 
+project/FastShiftIn.cpp.o: ../../FastShiftIn.cpp project/FastShiftIn.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
+
+project/FastShiftIn.cpp.d: ;
+
+-include project/FastShiftIn.cpp.d 
+
 project/MaquinaRitmo.cpp.o: ../../MaquinaRitmo.cpp project/MaquinaRitmo.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 
 project/MaquinaRitmo.cpp.d: ;
 
@@ -76,7 +86,7 @@ project/MaquinaRitmo.cpp.d: ;
 
 project/Pattern.cpp.o: ../../Pattern.cpp project/Pattern.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 
 project/Pattern.cpp.d: ;
 
@@ -84,24 +94,24 @@ project/Pattern.cpp.d: ;
 
 project/Sequencer.cpp.o: ../../Sequencer.cpp project/Sequencer.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 
 project/Sequencer.cpp.d: ;
 
 -include project/Sequencer.cpp.d 
 
-project/Voice.cpp.o: ../../Voice.cpp project/Voice.cpp.d
+project/Tlc5940.cpp.o: ../../Tlc5940.cpp project/Tlc5940.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 
-project/Voice.cpp.d: ;
+project/Tlc5940.cpp.d: ;
 
--include project/Voice.cpp.d 
+-include project/Tlc5940.cpp.d 
 
 
 core/abi.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/abi.cpp core/abi.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/abi.cpp.d: ;
@@ -110,7 +120,7 @@ core/abi.cpp.d: ;
 
 core/CDC.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/CDC.cpp core/CDC.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/CDC.cpp.d: ;
@@ -119,7 +129,7 @@ core/CDC.cpp.d: ;
 
 core/HardwareSerial.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/HardwareSerial.cpp core/HardwareSerial.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/HardwareSerial.cpp.d: ;
@@ -128,7 +138,7 @@ core/HardwareSerial.cpp.d: ;
 
 core/HardwareSerial0.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/HardwareSerial0.cpp core/HardwareSerial0.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/HardwareSerial0.cpp.d: ;
@@ -137,7 +147,7 @@ core/HardwareSerial0.cpp.d: ;
 
 core/HardwareSerial1.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/HardwareSerial1.cpp core/HardwareSerial1.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/HardwareSerial1.cpp.d: ;
@@ -146,7 +156,7 @@ core/HardwareSerial1.cpp.d: ;
 
 core/HardwareSerial2.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/HardwareSerial2.cpp core/HardwareSerial2.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/HardwareSerial2.cpp.d: ;
@@ -155,7 +165,7 @@ core/HardwareSerial2.cpp.d: ;
 
 core/HardwareSerial3.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/HardwareSerial3.cpp core/HardwareSerial3.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/HardwareSerial3.cpp.d: ;
@@ -164,7 +174,7 @@ core/HardwareSerial3.cpp.d: ;
 
 core/hooks.c.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/hooks.c core/hooks.c.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 	
 core/hooks.c.d: ;
@@ -173,7 +183,7 @@ core/hooks.c.d: ;
 
 core/IPAddress.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/IPAddress.cpp core/IPAddress.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/IPAddress.cpp.d: ;
@@ -182,7 +192,7 @@ core/IPAddress.cpp.d: ;
 
 core/main.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/main.cpp core/main.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/main.cpp.d: ;
@@ -191,7 +201,7 @@ core/main.cpp.d: ;
 
 core/new.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/new.cpp core/new.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/new.cpp.d: ;
@@ -200,7 +210,7 @@ core/new.cpp.d: ;
 
 core/PluggableUSB.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/PluggableUSB.cpp core/PluggableUSB.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/PluggableUSB.cpp.d: ;
@@ -209,7 +219,7 @@ core/PluggableUSB.cpp.d: ;
 
 core/Print.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/Print.cpp core/Print.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/Print.cpp.d: ;
@@ -218,7 +228,7 @@ core/Print.cpp.d: ;
 
 core/Stream.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/Stream.cpp core/Stream.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/Stream.cpp.d: ;
@@ -227,7 +237,7 @@ core/Stream.cpp.d: ;
 
 core/Tone.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/Tone.cpp core/Tone.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/Tone.cpp.d: ;
@@ -236,7 +246,7 @@ core/Tone.cpp.d: ;
 
 core/USBCore.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/USBCore.cpp core/USBCore.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/USBCore.cpp.d: ;
@@ -245,7 +255,7 @@ core/USBCore.cpp.d: ;
 
 core/WInterrupts.c.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/WInterrupts.c core/WInterrupts.c.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 	
 core/WInterrupts.c.d: ;
@@ -254,7 +264,7 @@ core/WInterrupts.c.d: ;
 
 core/wiring.c.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/wiring.c core/wiring.c.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 	
 core/wiring.c.d: ;
@@ -263,7 +273,7 @@ core/wiring.c.d: ;
 
 core/wiring_analog.c.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/wiring_analog.c core/wiring_analog.c.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 	
 core/wiring_analog.c.d: ;
@@ -272,7 +282,7 @@ core/wiring_analog.c.d: ;
 
 core/wiring_digital.c.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/wiring_digital.c core/wiring_digital.c.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 	
 core/wiring_digital.c.d: ;
@@ -281,7 +291,7 @@ core/wiring_digital.c.d: ;
 
 core/wiring_pulse.c.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/wiring_pulse.c core/wiring_pulse.c.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 	
 core/wiring_pulse.c.d: ;
@@ -290,12 +300,12 @@ core/wiring_pulse.c.d: ;
 
 core/wiring_pulse.S.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/wiring_pulse.S
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -x assembler-with-cpp -flto -MMD -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -x assembler-with-cpp -flto -MMD -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/wiring_shift.c.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/wiring_shift.c core/wiring_shift.c.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 	
 core/wiring_shift.c.d: ;
@@ -304,7 +314,7 @@ core/wiring_shift.c.d: ;
 
 core/WMath.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/WMath.cpp core/WMath.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/WMath.cpp.d: ;
@@ -313,7 +323,7 @@ core/WMath.cpp.d: ;
 
 core/WString.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/WString.cpp core/WString.cpp.d
 	@$(call mymkdir,$(dir $@))
-	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" "$<" -o "$@"
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
 	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs  "./core.a" "$@"
 
 core/WString.cpp.d: ;
@@ -321,4 +331,12 @@ core/WString.cpp.d: ;
 -include core/WString.cpp.d
 
 
+
+libraries/SPI/src/SPI.cpp.o: /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src/SPI.cpp libraries/SPI/src/SPI.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"/Users/sebsouza/.arduinocdt/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR   -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard" -I"/Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/libraries/SPI/src" "$<" -o "$@"
+
+libraries/SPI/src/SPI.cpp.d: ;
+
+-include libraries/SPI/src/SPI.cpp.d
 

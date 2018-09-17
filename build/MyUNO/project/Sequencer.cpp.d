@@ -10,4 +10,4 @@ project/Sequencer.cpp.o: ../../Sequencer.cpp ../../Sequencer.h \
  /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/USBAPI.h \
  /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/cores/arduino/Arduino.h \
  /Users/sebsouza/.arduinocdt/packages/arduino/hardware/avr/1.6.21/variants/standard/pins_arduino.h \
- ../../Pattern.h
+ ../../Pattern.h ../../Tlc5940.h
